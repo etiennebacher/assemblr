@@ -6,7 +6,7 @@ ui <- miniPage(
     miniTabPanel("Table Options", icon = icon("table"),
                  miniContentPanel(### OPTIONS ###
                    fillRow(
-                     flex = c(1, 2),
+                     flex = c(1, 1),
                      fillCol(
                        dq_accordion(
                          id = "latex_options",

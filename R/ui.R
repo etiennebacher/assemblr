@@ -1,28 +1,17 @@
 ui <- miniPage(
   # theme = "styles.css",
-  gadgetTitleBar("Customize your table with {stargazer}"),
+  gadgetTitleBar("Build your {stargazer} tables interactively"),
   br(),
   miniTabstripPanel(
     miniTabPanel("Table Options", icon = icon("table"),
-                 miniContentPanel(### OPTIONS ###
+                 miniContentPanel(
                    fillRow(
-                     flex = c(1, 1),
+                     flex = c(1, 0.5, 2),
                      fillCol(
-                       dq_accordion(
+                       bsCollapse(
                          id = "latex_options",
-                         bg_color = "LightGray",
-
-                         ### Titles of dropdown menus
-                         titles = list(
-                           "General options",
-                           "Title and columns options",
-                           "Result options",
-                           "Additional info options",
-                           "Footnotes options"
-                         ),
-
-                         contents = tagList(
-                           ### Inputs for general options
+                         bsCollapsePanel(
+                           title = "General options",
                            tagList(selectInput(
                              "style",
                              "Style",
@@ -38,9 +27,10 @@ ui <- miniPage(
                                "Journal of Policy Analysis and Management" = "jpam",
                                "Quarterly Journal of Economics" = "qje"
                              )
-                           )),
-
-                           ### Inputs for title and columns
+                           ))
+                          ),
+                         bsCollapsePanel(
+                           title = "Title and columns options",
                            tagList(
                              textInput("title", "Title of the table"),
                              textInput("caption", "Caption of the table"),
@@ -52,9 +42,10 @@ ui <- miniPage(
                              ### COMMENT MODIFIER LES NOMS DE COLONNE FACILEMENT ? ###
                              ### voir l'option dep.var.labels et column.labels
 
-                           ),
-
-                           ### Inputs for results
+                           )
+                         ),
+                         bsCollapsePanel(
+                           title = "Result options",
                            tagList(
                              ### COMMENT MODIFIER LES NOMS DE VARIABLE FACILEMENT ? ###
                              ### voir l'option covariates.labels
@@ -92,9 +83,10 @@ ui <- miniPage(
                                width = "75%",
                                placeholder = 'Ex: "@", "@@", "@@@"'
                              )
-                           ),
-
-                           ### Inputs for additional info
+                           )
+                         ),
+                         bsCollapsePanel(
+                           title = "Additional info options",
                            tagList(
                              actionButton("add_row_statistics",
                                           "Add a row to table statistics"),
@@ -106,16 +98,21 @@ ui <- miniPage(
                                ### METTRE UI
                                ### dépend du nombre de colonnes donc mettre ça dans un renderUI ?
                              )
-                           ),
-
-                           ### Inputs for footnotes
+                           )
+                         ),
+                         bsCollapsePanel(
+                           title = "Footnotes options",
                            tagList(checkboxInput("foo5", "foo5"))
                          )
                        )
-                     ),
-                     fillCol(tableOutput("stargazer"))
-                   ))),
+                       ),
+                     fillCol(),
+                     fillCol(uiOutput("stargazer"))
+                   )
+                   )
+                 ),
     miniTabPanel("Code", icon = icon("code"))
 
   )
 )
+

@@ -1,6 +1,9 @@
 server <- function(input, output, session){
 
-  output$stargazer <- renderTable(mtcars)
+  output$stargazer <- renderUI({
+    regression <- lm(mpg ~ drat + hp + disp, data =  mtcars)
+    HTML(stargazer(regression, regression, regression, type = "html"))
+  })
 
   ### Close app if cancel or done
   observeEvent(input$cancel, {

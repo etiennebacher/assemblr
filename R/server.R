@@ -1,5 +1,8 @@
 server <- function(input, output, session){
 
+  # For helpers (from shinyhelper)
+  observe_helpers(help_dir = "R/helpers/")
+
   regression <- lm(mpg ~ drat + hp + disp, data =  mtcars)
 
   table_output <- reactive({
@@ -20,7 +23,17 @@ server <- function(input, output, session){
         ### Result options
         ci = input$include_ci,
         ci.level = input$ci_level,
-        ci.separator = input$ci_separator
+        ci.separator = input$ci_separator,
+        single.row = input$single_row,
+
+        ### Additional info options
+        df = input$df,
+
+        ### Footnote options
+        notes = input$notes,
+        notes.append = input$notes_append,
+        notes.align = input$notes_align,
+        notes.label = input$notes_label
       )
     )
   })

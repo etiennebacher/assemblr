@@ -5,6 +5,10 @@ ui <- miniPage(
   miniTabstripPanel(
     miniTabPanel("Table Options", icon = icon("table"),
                  miniContentPanel(
+                   selectInput("choose_format",
+                               "Choose the output format",
+                               choices = c("HTML", "LaTeX"),
+                               selected = "LaTeX"),
                    fillRow(
                      flex = c(1, 0.5, 2),
                      fillCol(
@@ -111,7 +115,21 @@ ui <- miniPage(
                    )
                    )
                  ),
-    miniTabPanel("Code", icon = icon("code"))
+    miniTabPanel("Code", icon = icon("code")),
+    miniTabPanel("About", icon = icon("info"),
+                 miniContentPanel(
+                   fillRow(
+                     flex = c(1, 2, 1),
+                     fillCol(),
+                     fillCol(
+                       wellPanel(
+                         p("The goal of this addin is to build {stargazer} tables more easily. At the beginning, choose if you want an HTML or a LaTeX table (note however that some options are only available with LaTeX output).")
+                       )
+                     ),
+                     fillCol()
+                   )
+                )
+    )
 
   )
 )

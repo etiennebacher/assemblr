@@ -1,8 +1,15 @@
+#' General options
+#'
+#' @return
+#' @importFrom magrittr %>%
+#' @export
+#'
+#' @examples NULL
 general_options <- function(){
-  bsCollapsePanel(
+  shinyBS::bsCollapsePanel(
     title = "General options",
-    tagList(
-      selectInput(
+    shiny::tagList(
+      shiny::selectInput(
         "style",
         "Style",
         choices = c(

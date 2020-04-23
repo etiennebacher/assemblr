@@ -1,13 +1,22 @@
+#' Title
+#'
+#' @param input something
+#' @param output something else
+#' @param session something else
+#'
+#' @return
+#' @export
+#'
+#' @examples NULL
 server <- function(input, output, session){
 
-  # For helpers (from shinyhelper)
-  observe_helpers(help_dir = "R/helpers/")
+  # shinyhelper::observe_helpers(help_dir = "R/helpers/")
 
-  regression <- lm(mpg ~ drat + hp + disp, data =  mtcars)
+  regression <- lm(mpg ~ drat + hp + disp, data = datasets::mtcars)
 
-  table_output <- reactive({
-    HTML(
-      stargazer(
+  table_output <- shiny::reactive({
+    shiny::HTML(
+      stargazer::stargazer(
         regression,
         regression,
         regression,
@@ -25,6 +34,10 @@ server <- function(input, output, session){
         ci.level = input$ci_level,
         ci.separator = input$ci_separator,
         single.row = input$single_row,
+        decimal.mark = input$decimal_mark,
+        digits = input$digits,
+        digits.extra = input$digits_extra,
+        initial.zero = input$initial_zero,
 
         ### Additional info options
         df = input$df,
@@ -39,16 +52,16 @@ server <- function(input, output, session){
   })
 
   ### Result
-  output$stargazer <- renderUI({
+  output$stargazer <- shiny::renderUI({
     table_output()
   })
 
   ### Close app if cancel or done
-  observeEvent(input$cancel, {
-    stopApp()
+  shiny::observeEvent(input$cancel, {
+    shiny::stopApp()
   })
-  observeEvent(input$done, {
-    stopApp()
+  shiny::observeEvent(input$done, {
+    shiny::stopApp()
   })
 
 }

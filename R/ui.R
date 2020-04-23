@@ -1,18 +1,25 @@
-ui <- miniPage(
+#' Title
+#'
+#' @return
+#' @export
+#'
+#' @examples NULL
+ui <- function(){
+  miniUI::miniPage(
   # theme = "styles.css",
-  gadgetTitleBar("Build your {stargazer} tables interactively"),
-  br(),
-  miniTabstripPanel(
-    miniTabPanel("Table Options", icon = icon("table"),
-                 miniContentPanel(
-                   selectInput("choose_format",
+  miniUI::gadgetTitleBar("Build your {stargazer} tables interactively"),
+  shiny::br(),
+  miniUI::miniTabstripPanel(
+    miniUI::miniTabPanel("Table Options", icon = shiny::icon("table"),
+                         miniUI::miniContentPanel(
+                   shiny::selectInput("choose_format",
                                "Choose the output format",
                                choices = c("HTML", "LaTeX"),
                                selected = "LaTeX"),
-                   fillRow(
+                   shiny::fillRow(
                      flex = c(1, 0.5, 2),
-                     fillCol(
-                       bsCollapse(
+                     shiny::fillCol(
+                       shinyBS::bsCollapse(
                          id = "latex_options",
                          general_options(),
                          title_and_columns_options(),
@@ -21,28 +28,30 @@ ui <- miniPage(
                          footnote_options()
                        )
                        ),
-                     fillCol(),
-                     fillCol(uiOutput("stargazer"))
+                     shiny::fillCol(),
+                     shiny::fillCol(
+                       shiny::uiOutput("stargazer")
+                      )
                    )
                    )
                  ),
-    miniTabPanel("Code", icon = icon("code")),
-    miniTabPanel("About", icon = icon("info"),
-                 miniContentPanel(
-                   fillRow(
+    miniUI::miniTabPanel("Code", icon = shiny::icon("code")),
+    miniUI::miniTabPanel("About", icon = shiny::icon("info"),
+                miniUI::miniContentPanel(
+                  shiny::fillRow(
                      flex = c(1, 2, 1),
-                     fillCol(),
-                     fillCol(
-                       wellPanel(
-                         p("The goal of this addin is to build {stargazer} tables more easily. At the beginning, choose if you want an HTML or a LaTeX table (note however that some options are only available with LaTeX output).",
-                           a("This cheatsheet", href = "https://www.jakeruss.com/cheatsheets/stargazer/"), "by Jake Russ has been extremely useful to build this addin.")
+                     shiny::fillCol(),
+                     shiny::fillCol(
+                       shiny::wellPanel(
+                         shiny::p("The goal of this addin is to build {stargazer} tables more easily. At the beginning, choose if you want an HTML or a LaTeX table (note however that some options are only available with LaTeX output).",
+                                  shiny::a("This cheatsheet", href = "https://www.jakeruss.com/cheatsheets/stargazer/"), "by Jake Russ has been extremely useful to build this addin.")
                        )
                      ),
-                     fillCol()
+                     shiny::fillCol()
                    )
                 )
     )
 
   )
 )
-
+}

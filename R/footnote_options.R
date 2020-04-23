@@ -1,27 +1,33 @@
+#' Title
+#'
+#' @return
+#' @export
+#'
+#' @examples NULL
 footnote_options <- function(){
-  bsCollapsePanel(
+  shinyBS::bsCollapsePanel(
     title = "Footnotes options",
-    tagList(
-      textInput(
+    shiny::tagList(
+      shiny::textInput(
         "notes",
         "Modifying table notes",
         placeholder = "These are some notes..."
       ),
 
-      checkboxInput(
+      shiny::checkboxInput(
         "notes_append",
         "Show the significance notes",
         value = TRUE
       ),
 
-      selectInput(
+      shiny::selectInput(
         "notes_align",
         "Notes alignment",
         choices = c("Left" = "l", "Centre" = "c", "Right" = "r"),
         selected = "r"
       ),
 
-      textInput(
+      shiny::textInput(
         "notes_label",
         "Note section label",
         value = "Notes:"

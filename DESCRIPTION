@@ -20,3 +20,5 @@ Imports:
     stats,
     purrr,
     base
+Suggests: 
+    testthat

@@ -12,8 +12,6 @@ server <- function(input, output, session){
 
   # shinyhelper::observe_helpers(help_dir = "R/helpers/")
 
-  regression <- lm(mpg ~ drat + hp + disp, data = datasets::mtcars)
-
   table_output <- shiny::reactive({
     shiny::HTML(
       stargazer::stargazer(

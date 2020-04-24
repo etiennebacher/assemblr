@@ -15,5 +15,11 @@ get_data <- function(){
   dd <- purrr::map(get_ge, base::get) # get object contents
   names(dd) <- get_ge
   dd <- dd[purrr::map_lgl(dd, inherits, what = 'lm')]
+
+  if(length(dd) == 0){
+    dd <- list(regression_1 = lm(mpg ~ drat + hp + disp, data = datasets::mtcars),
+               regression_2 = lm(mpg ~ drat, data = datasets::mtcars))
+  }
+  return(dd)
 }
 

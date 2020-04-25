@@ -5,6 +5,9 @@
 #'
 #' @examples NULL
 ui <- function(){
+
+  list_regressions <- get_data()
+
   miniUI::miniPage(
   # theme = "styles.css",
   miniUI::gadgetTitleBar("Build your {stargazer} tables interactively"),
@@ -12,10 +15,15 @@ ui <- function(){
   miniUI::miniTabstripPanel(
     miniUI::miniTabPanel("Table Options", icon = shiny::icon("table"),
                          miniUI::miniContentPanel(
-                   shiny::selectInput("choose_format",
-                               "Choose the output format",
-                               choices = c("HTML", "LaTeX"),
-                               selected = "LaTeX"),
+                   # shiny::selectInput("choose_format",
+                   #             "Choose the output format",
+                   #             choices = c("HTML", "LaTeX"),
+                   #             selected = "LaTeX"),
+                           shiny::selectInput("choose_regressions",
+                                              "Choose the regressions in the table",
+                                              choices = names(list_regressions),
+                                              multiple = TRUE,
+                                              selected = names(list_regressions)),
                    shiny::fillRow(
                      flex = c(1, 0.5, 2),
                      shiny::fillCol(

@@ -16,6 +16,6 @@ A function that captures the objects that work with {stargazer}, such as `lm` ob
 # make a random regression and create a random dataframe
 regression <- lm(mpg ~ drat + hp + disp, data = datasets::mtcars)
 test <- mtcars
-# show only the objects whose class is "lm"
+# store only the objects whose class is "lm" in a list
 get_data()
 }

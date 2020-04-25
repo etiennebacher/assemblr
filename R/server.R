@@ -12,12 +12,14 @@ server <- function(input, output, session){
 
   # shinyhelper::observe_helpers(help_dir = "R/helpers/")
 
+  # Get the regressions
+  x <- get_data()
+
+  # Manipulations of the stargazer tables
   table_output <- shiny::reactive({
     shiny::HTML(
       stargazer::stargazer(
-        regression,
-        regression,
-        regression,
+        x[input$choose_regressions],
 
         ### General options
         type = "html",
@@ -51,6 +53,10 @@ server <- function(input, output, session){
 
   ### Result
   output$stargazer <- shiny::renderUI({
+    validate(
+      need(length(input$choose_regressions) != 0,
+      "Please choose at least one regression"
+    ))
     table_output()
   })
 

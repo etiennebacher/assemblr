@@ -14,7 +14,7 @@ get_data <- function(){
   get_ge <- base::ls(envir = base::globalenv())
   dd <- purrr::map(get_ge, base::get) # get object contents
   names(dd) <- get_ge
-  dd <- dd[purrr::map_lgl(dd, inherits, what = 'lm')]
+  dd <- dd[purrr::map_lgl(dd, inherits, what = models_supported_stargazer())]
 
   if(length(dd) == 0){
     dd <- list(regression_1 = lm(mpg ~ drat + hp + disp, data = datasets::mtcars),
@@ -22,4 +22,13 @@ get_data <- function(){
   }
   return(dd)
 }
+
+
+
+
+
+
+
+
+
 

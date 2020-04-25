@@ -13,9 +13,9 @@ A list containing the objects that {stargazer} can deal with.
 A function that captures the objects that work with {stargazer}, such as `lm` objects. It is necessary since the user has to choose the objects he/she wants to put in the table. Function coming from [this answer](https://community.rstudio.com/t/how-can-i-access-the-users-global-environment/62688/2)
 }
 \examples{
-# make a random regression and store a dataframe
-test <- mtcars
+# make a random regression and create a random dataframe
 regression <- lm(mpg ~ drat + hp + disp, data = datasets::mtcars)
-# show the objects in the user's global environment
+test <- mtcars
+# show only the objects whose class is "lm"
 get_data()
 }

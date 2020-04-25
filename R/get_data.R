@@ -5,10 +5,10 @@
 #' @return A list containing the objects that {stargazer} can deal with.
 #' @export
 #'
-#' @examples # make a random regression and store a dataframe
-#' @examples test <- mtcars
+#' @examples # make a random regression and create a random dataframe
 #' @examples regression <- lm(mpg ~ drat + hp + disp, data = datasets::mtcars)
-#' @examples # show the objects in the user's global environment
+#' @examples test <- mtcars
+#' @examples # store only the objects whose class is "lm" in a list
 #' @examples get_data()
 get_data <- function(){
   get_ge <- base::ls(envir = base::globalenv())

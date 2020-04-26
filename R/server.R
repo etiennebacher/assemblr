@@ -54,6 +54,7 @@ server <- function(input, output, session){
         digits = input$digits,
         digits.extra = input$digits_extra,
         initial.zero = input$initial_zero,
+        omit = input$omit,
 
         ### Additional info options
         df = input$df,

@@ -11,9 +11,10 @@ title_and_columns_options <- function(){
       shiny::textInput("title", "Title of the table"),
       shiny::textInput("caption", "Caption of the table"),
 
-      shiny::checkboxInput("depvar_label",
-                    "Include the dependent variable label?",
-                    value = TRUE),
+      shiny::checkboxInput(
+        "depvar_label",
+        "Include the dependent variable label?",
+        value = TRUE),
 
       ### COMMENT MODIFIER LES NOMS DE COLONNE FACILEMENT ? ###
       ### voir l'option dep.var.labels et column.labels

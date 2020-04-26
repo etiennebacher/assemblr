@@ -13,13 +13,29 @@ server <- function(input, output, session){
   # shinyhelper::observe_helpers(help_dir = "R/helpers/")
 
   # Get the regressions
-  x <- get_data()
+  list_regressions <- get_data()
+
+  # Launch modal to select regressions when button is clicked and at startup
+  shiny::observeEvent(input$regressions, {
+    showModal(modalDialog(
+      title = "Choose the regressions in the table",
+      shiny::selectInput(
+        "choose_regressions",
+        "",
+        choices = names(list_regressions),
+        multiple = TRUE,
+        selected = names(list_regressions)
+      ),
+      easyClose = TRUE
+    ))
+  }, ignoreNULL = FALSE)
 
   # Manipulations of the stargazer tables
   table_output <- shiny::reactive({
+    shiny::req(input$choose_regressions)
     shiny::HTML(
       stargazer::stargazer(
-        x[input$choose_regressions],
+        list_regressions[input$choose_regressions],
 
         ### General options
         type = "html",
@@ -60,11 +76,8 @@ server <- function(input, output, session){
     table_output()
   })
 
-  ### Close app if cancel or done
+  ### Close app if cancel
   shiny::observeEvent(input$cancel, {
-    shiny::stopApp()
-  })
-  shiny::observeEvent(input$done, {
     shiny::stopApp()
   })
 

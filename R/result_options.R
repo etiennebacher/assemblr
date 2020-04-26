@@ -1,7 +1,7 @@
 #' Result options
 #' Function that details the content of the "Result options" dropdown
 #'
-#' @return The part of the Shiny UI that details the options for the results in the {stargazer} table.
+#' @return The part of the Shiny UI that details the options for the results in the {\code{stargazer}} table.
 #' @importFrom magrittr %>%
 #' @export
 #'

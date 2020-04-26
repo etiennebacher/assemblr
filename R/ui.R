@@ -10,7 +10,11 @@ ui <- function(){
 
   miniUI::miniPage(
   # theme = "styles.css",
-  miniUI::gadgetTitleBar("Build your {stargazer} tables interactively"),
+  miniUI::gadgetTitleBar(
+    "Build your {stargazer} tables interactively",
+    left = miniUI::miniTitleBarButton("regressions", "Regressions", primary = TRUE),
+    right = miniUI::miniTitleBarButton("cancel", "Cancel")
+    ),
   shiny::br(),
   miniUI::miniTabstripPanel(
     miniUI::miniTabPanel("Table Options", icon = shiny::icon("table"),
@@ -19,11 +23,6 @@ ui <- function(){
                            #             "Choose the output format",
                            #             choices = c("HTML", "LaTeX"),
                            #             selected = "LaTeX"),
-                           shiny::selectInput("choose_regressions",
-                                              "Choose the regressions in the table",
-                                              choices = names(list_regressions),
-                                              multiple = TRUE,
-                                              selected = names(list_regressions)),
                            shiny::fillRow(
                              flex = c(0.5, 0.2, 0.5),
                              shiny::fillCol(

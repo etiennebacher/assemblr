@@ -8,7 +8,7 @@ Function that details the content of the "Result options" dropdown}
 result_options()
 }
 \value{
-The part of the Shiny UI that details the options for the results in the {stargazer} table.
+The part of the Shiny UI that details the options for the results in the {\code{stargazer}} table.
 }
 \description{
 Result options

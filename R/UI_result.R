@@ -8,25 +8,21 @@
 #' @examples NULL
 result_options <- function(){
 
-  # Obtain the list of objects supported by stargazer
-  list_regressions <- get_data()
-
-  # For each regression, store variables names in a part of a list
-  variables_regressions <- list()
-  for (i in 1:length(list_regressions)){
-    variables_regressions[[i]] <- names(list_regressions[[i]]$coefficients)
-  }
-  # Remove duplicates of names and store it in a vector
-  all_variables <- unique(unlist(variables_regressions))
-  # Rename "(Intercept)" as "Constant" since it is the name given by stargazer
-  all_variables[all_variables == "(Intercept)"] <- "Constant"
-
+  all_variables <- get_variables_names()
 
   result_options_ui <- shinyBS::bsCollapsePanel(
     title = "Result options",
     shiny::tagList(
-      ### COMMENT MODIFIER LES NOMS DE VARIABLE FACILEMENT ? ###
-      ### voir l'option covariates.labels
+
+      # Idée : faire un modal avec deux colonnes. Dans chaque colonne, il y a exactement autant de textInput qu'il y a de covariates et donc il y a des textinput face à face. Titre de la colonne de gauche est "noms actuels" et celui de la colonne de droite est "nouveaux noms". Colonnes déjà remplies avec les noms des variables, gauche et droite identiques. Faire un truc avec shinyjs pour que les textinput à gauche ne puissent pas etre modifiés et qu'on puisse seulement modifier les nouveaux noms.
+      # actionbutton à la fin pour valider et appliquer les changements
+      shiny::actionButton(
+        "change_covariates_labels",
+        "Change covariates labels"
+      ),
+
+      shiny::br(),
+
       shiny::textInput("report", "Values to report") %>%
         shinyhelper::helper(
           type = "markdown",

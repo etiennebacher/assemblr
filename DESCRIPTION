@@ -19,6 +19,7 @@ Imports:
     datasets,
     stats,
     purrr,
-    base
+    base,
+    shinyjs
 Suggests: 
     testthat

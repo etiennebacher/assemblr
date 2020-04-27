@@ -12,13 +12,15 @@ server <- function(input, output, session){
 
   # shinyhelper::observe_helpers(help_dir = "R/helpers/")
 
-  # Get the regressions
+  # Get the regressions and the names of the variables
   list_regressions <- get_data()
+  all_variables <- get_variables_names()
 
   # Launch modal to select regressions when button is clicked and at startup
   shiny::observeEvent(input$regressions, {
-    showModal(modalDialog(
+    shiny::showModal(shiny::modalDialog(
       title = "Choose the regressions in the table",
+      shiny::HTML(paste("If your environment does not contain object supported by {stargazer}, made-up regressions (", code("regression_1"), " and ", code("regression_2"), ") will be available for you to test this addin.", sep = "")),
       shiny::selectInput(
         "choose_regressions",
         "",
@@ -29,6 +31,20 @@ server <- function(input, output, session){
       easyClose = TRUE
     ))
   }, ignoreNULL = FALSE)
+
+  # Launch modal to change covariates labels
+  shiny::observeEvent(input$change_covariates_labels, {
+    showModal(modalDialog(
+      title = "Change covariates labels",
+      shiny::column(12,
+                    shiny::actionButton("apply_covariates_labels_changes",
+                                        "Apply changes")
+      ),
+      UI_change_cov_labels(2)
+    ))
+
+    callModule(server_change_cov_labels, 2)
+  })
 
   # Manipulations of the stargazer tables
   table_output <- shiny::reactive({

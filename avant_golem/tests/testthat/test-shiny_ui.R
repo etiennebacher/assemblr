@@ -1,24 +1,29 @@
+test_that("ui is a shiny tagList", {
+  x <- ui()
+  expect_is(x, "shiny.tag.list")
+})
+
 test_that("general options are a shiny tagList", {
-  x <- mod_general_ui("general_ui_1")
+  x <- general_options()
   expect_is(x, "shiny.tag")
 })
 
 test_that("title and columns options are a shiny tagList", {
-  x <- mod_title_and_columns_ui("title_and_columns_ui_1")
+  x <- title_and_columns_options()
   expect_is(x, "shiny.tag")
 })
 
 test_that("result options are a shiny tagList", {
-  x <- mod_results_ui("results_ui_1")
+  x <- result_options()
   expect_is(x, "shiny.tag")
 })
 
 test_that("additional info options are a shiny tagList", {
-  x <- mod_additional_info_ui("additional_info_ui_1")
+  x <- additional_info_options()
   expect_is(x, "shiny.tag")
 })
 
 test_that("footnote options are a shiny tagList", {
-  x <- mod_footnote_ui("footnote_ui_1")
+  x <- footnote_options()
   expect_is(x, "shiny.tag")
 })

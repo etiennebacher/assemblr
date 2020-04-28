@@ -1,0 +1,25 @@
+Package: hammer
+Type: Package
+Title: Build Stargazer Tables More Easily
+Version: 0.1.0
+Authors@R: person("Etienne", "Bacher", email = "etienne.bacher@orange.fr", role = c("aut", "cre"))
+Description: {stargazer} has a lot of options to customize the output. 
+    This package provides a graphical interface to build {stargazer} tables more easily.
+License: GPL-3
+Encoding: UTF-8
+LazyData: true
+RoxygenNote: 7.1.0
+Imports: 
+    stargazer,
+    shiny,
+    shinyBS,
+    miniUI,
+    shinyhelper,
+    magrittr,
+    datasets,
+    stats,
+    purrr,
+    base,
+    shinyjs
+Suggests: 
+    testthat

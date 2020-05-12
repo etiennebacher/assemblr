@@ -1,12 +1,15 @@
+/*
 .title {
   text-align: center;
   font-variant: small-caps;
 }
-      
-* {
-  font-family: 'Times New Roman';
-} 
 
 .selectize-control {
   position: static;
 }
+*/
+
+* {
+  font-family: 'Times New Roman';
+}
+

@@ -38,7 +38,12 @@ mod_general_ui <- function(id){
 #'
 #' @noRd
 mod_general_server <- function(input, output, session){
-  ns <- session$ns
+
+  return(
+    list(
+      style = reactive({ input$style })
+    )
+  )
 
 }
 

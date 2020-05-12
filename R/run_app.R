@@ -8,11 +8,9 @@
 run_app <- function(
   ...
 ) {
+  viewer <- shiny::dialogViewer(dialogName = "hammer", width = 800, height = 1000)
   with_golem_options(
-    app = shinyApp(
-      ui = app_ui, 
-      server = app_server
-    ), 
+    app = shiny::runGadget(app_ui, app_server, viewer = viewer),
     golem_opts = list(...)
   )
 }

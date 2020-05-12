@@ -9,35 +9,34 @@
 #' @importFrom shiny NS tagList
 mod_footnote_ui <- function(id){
   ns <- NS(id)
-    shinyBS::bsCollapsePanel(
-      title = "Footnotes options",
-      shiny::tagList(
-        shiny::textInput(
-          ns("notes"),
-          "Modifying table notes",
-          placeholder = "These are some notes..."
-        ),
 
-        shiny::checkboxInput(
-          ns("notes_append"),
-          "Show the significance notes",
-          value = TRUE
-        ),
+  shinyBS::bsCollapsePanel(
+    title = "Footnotes options",
+    shiny::tagList(
+      shiny::textInput(ns("notes"),
+                       "Modifying table notes",
+                       placeholder = "These are some notes..."),
 
-        shiny::selectInput(
-          ns("notes_align"),
-          "Notes alignment",
-          choices = c("Left" = "l", "Centre" = "c", "Right" = "r"),
-          selected = "r"
-        ),
+      shiny::checkboxInput(ns("notes_append"),
+                           "Show the significance notes",
+                           value = TRUE),
 
-        shiny::textInput(
-          ns("notes_label"),
-          "Note section label",
-          value = "Notes:"
-        )
-      )
+      shiny::selectInput(
+        ns("notes_align"),
+        "Notes alignment",
+        choices = c(
+          "Left" = "l",
+          "Centre" = "c",
+          "Right" = "r"
+        ),
+        selected = "r"
+      ),
+
+      shiny::textInput(ns("notes_label"),
+                       "Note section label",
+                       value = "Notes:")
     )
+  )
 
 }
 
@@ -45,7 +44,15 @@ mod_footnote_ui <- function(id){
 #'
 #' @noRd
 mod_footnote_server <- function(input, output, session){
-  ns <- session$ns
+
+  return(
+    list(
+      notes = reactive({ input$notes }),
+      notes_append = reactive({ input$notes_append }),
+      notes_align = reactive({ input$notes_align }),
+      notes_label = reactive({ input$notes_label })
+    )
+  )
 
 }
 

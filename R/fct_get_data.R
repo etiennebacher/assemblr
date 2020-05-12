@@ -4,6 +4,7 @@
 #'
 #' @return A list containing the objects that {stargazer} can deal with.
 #' @export
+#' @importFrom stats lm
 #'
 #' @examples # make a random regression and create a random dataframe
 #' @examples regression <- lm(mpg ~ drat + hp + disp, data = datasets::mtcars)

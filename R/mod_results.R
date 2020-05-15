@@ -13,7 +13,7 @@ mod_results_ui <- function(id){
     title = "Result options",
     shiny::tagList(
       # Idée : faire un modal avec deux colonnes. Dans chaque colonne, il y a exactement autant de textInput qu'il y a de covariates et donc il y a des textinput face à face. Titre de la colonne de gauche est "noms actuels" et celui de la colonne de droite est "nouveaux noms". Colonnes déjà remplies avec les noms des variables, gauche et droite identiques. Faire un truc avec shinyjs pour que les textinput à gauche ne puissent pas etre modifiés et qu'on puisse seulement modifier les nouveaux noms.
-      # actionbutton à la fin pour valider et appliquer les changements
+      # actionbutton pour lancer un modal où on peut modifier les noms des covariates
       shiny::actionButton(ns("change_covariates_labels"),
                           "Change covariates labels"),
 

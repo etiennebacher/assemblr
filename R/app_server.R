@@ -6,11 +6,20 @@
 #' @noRd
 app_server <- function( input, output, session ) {
 
+  # Call helper files
   shinyhelper::observe_helpers(help_dir = app_sys('app/helpers/'))
 
   # Get the regressions and the names of the variables
   list_regressions <- get_data()
   all_variables <- get_variables_names()
+
+  # Call all modules
+  opts_general <- callModule(mod_general_server, "1")
+  opts_title_and_columns <- callModule(mod_title_and_columns_server, "1")
+  opts_results <- callModule(mod_results_server, "1")
+  opts_additional_info <- callModule(mod_additional_info_server, "1")
+  opts_footnote <- callModule(mod_footnote_server, "1")
+
 
   # Launch modal to select regressions when button is clicked and at startup
   shiny::observeEvent(input$regressions, {
@@ -27,30 +36,27 @@ app_server <- function( input, output, session ) {
       easyClose = TRUE
     ))
   }, ignoreNULL = FALSE)
-  #
-  # # Launch modal to change covariates labels
-  # shiny::observeEvent(input$change_covariates_labels, {
-  #   showModal(modalDialog(
-  #     title = "Change covariates labels",
-  #     shiny::column(12,
-  #                   shiny::actionButton("apply_covariates_labels_changes",
-  #                                       "Apply changes")
-  #     ),
-  #     UI_change_cov_labels(2)
-  #   ))
-  #
-  #   callModule(server_change_cov_labels, 2)
-  # })
-  #
-  # # Manipulations of the stargazer tables
-
-  opts_general <- callModule(mod_general_server, "1")
-  opts_title_and_columns <- callModule(mod_title_and_columns_server, "1")
-  opts_results <- callModule(mod_results_server, "1")
-  opts_additional_info <- callModule(mod_additional_info_server, "1")
-  opts_footnote <- callModule(mod_footnote_server, "1")
 
 
+  # Launch modal to change covariates labels
+  shiny::observeEvent(opts_results$change_covariates_labels(), {
+
+    showModal(modalDialog(
+      title = "Change covariates labels",
+      mod_change_covnames_ui("1"),
+      callModule(mod_change_covnames_server, "1"),
+      footer = tagList(
+        modalButton("Dismiss"),
+        actionButton("apply_covnames",
+                     "Apply",
+                     style = "background-color: #286090;
+                              color: #fff;")
+      )
+    ))
+  })
+
+
+  # Manipulations of the stargazer tables
   table_output <- shiny::reactive({
     shiny::req(input$choose_regressions)
     shiny::HTML(
@@ -97,10 +103,15 @@ app_server <- function( input, output, session ) {
     table_output()
   })
 
-  # ### Close app if cancel
-  # shiny::observeEvent(input$cancel, {
-  #   shiny::stopApp()
-  # })
-  #
+
+  ### Reproduce code
+  callModule(mod_reproduce_server, "1")
+
+
+  ### Close app if cancel
+  shiny::observeEvent(input$cancel, {
+    shiny::stopApp()
+  })
+
 
 }

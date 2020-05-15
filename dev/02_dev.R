@@ -23,6 +23,7 @@ usethis::use_package( "miniUI" )
 usethis::use_package( "shinyhelper" )
 usethis::use_package( "purrr" )
 usethis::use_package( "base" )
+usethis::use_package( "shinymeta" )
 
 
 ## Add modules ----
@@ -33,6 +34,8 @@ golem::add_module( name = "results" ) # Name of the module
 golem::add_module( name = "additional_info" ) # Name of the module
 golem::add_module( name = "footnote" ) # Name of the module
 golem::add_module( name = "modify_labels" ) # Name of the module
+golem::add_module( name = "reproduce")
+golem::add_module( name = "change_covnames")
 
 ## Add helper functions ----
 ## Creates ftc_* and utils_*

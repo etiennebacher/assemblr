@@ -45,7 +45,16 @@ app_ui <- function(request) {
           )
         )
       ),
-      miniUI::miniTabPanel("Code", icon = shiny::icon("code")),
+      miniUI::miniTabPanel(
+        "Code",
+        icon = shiny::icon("code"),
+        miniUI::miniContentPanel(
+          shiny::fillRow(
+            flex = c(1, 2, 1),
+            mod_reproduce_ui("1")
+          )
+        )
+      ),
       miniUI::miniTabPanel(
         "About",
         icon = shiny::icon("info"),

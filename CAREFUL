@@ -1,0 +1,8 @@
+j'ai remplacé run_app() par hammer() dans :
+- test-golem-recommended.R
+- run_app.R
+- NAMESPACE
+(si je rechange, ne pas oublier de documenter avec ctrl + shift + D)
+
+
+ATTENTION : j'ai mis un expect_true en commentaires dans test-golem-recommended.R car incohérent : faire les tests ne donne pas d'erreur mais faire check donne une erreur

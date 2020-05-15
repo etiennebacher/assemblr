@@ -5,7 +5,7 @@
 #' @export
 #' @importFrom shiny shinyApp
 #' @importFrom golem with_golem_options
-run_app <- function(
+hammer <- function(
   ...
 ) {
   viewer <- shiny::dialogViewer(dialogName = "hammer", width = 800, height = 1000)

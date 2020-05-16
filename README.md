@@ -1,6 +1,4 @@
----
-title: "hammer"
-output: github_document
----
+hammer
+================
 
 > The goal of {hammer} is to build {stargazer} tables more easily.

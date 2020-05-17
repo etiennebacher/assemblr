@@ -13,3 +13,12 @@
   font-family: 'Times New Roman';
 }
 
+/* Necessary for modal to change covariates labels */
+.modal .modal-dialog{
+  overflow-y: initial !important
+}
+
+.modal-body {
+  height: 250px;
+  overflow-y: scroll;
+}

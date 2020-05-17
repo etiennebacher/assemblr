@@ -11,7 +11,7 @@ app_server <- function( input, output, session ) {
 
   # Get the regressions and the names of the variables
   list_regressions <- get_data()
-  all_variables <- get_variables_names()
+  all_variables <- reactiveValues ( variable_names = get_variables_names() )
 
   # Call all modules
   opts_general <- callModule(mod_general_server, "1")
@@ -41,20 +41,18 @@ app_server <- function( input, output, session ) {
   # Launch modal to change covariates labels
   shiny::observeEvent(opts_results$change_covariates_labels(), {
 
-    showModal(modalDialog(
-      title = "Change covariates labels",
-      mod_change_covnames_ui("1"),
-      callModule(mod_change_covnames_server, "1"),
-      footer = tagList(
-        modalButton("Dismiss"),
-        actionButton("apply_covnames",
-                     "Apply",
-                     style = "background-color: #286090;
-                              color: #fff;")
-      )
-    ))
-  })
+    showModal(mod_change_covnames_ui("1"))
 
+    change_covnames <- callModule(mod_change_covnames_server, "1")
+
+    # What is the interest of ancient names? They are stored in all_variables above (?)
+    # all_variables$variable_names <- change_covnames$ancient()
+
+    observeEvent(change_covnames$button(), {
+      all_variables$variable_names <- change_covnames$new()
+    })
+
+  })
 
   # Manipulations of the stargazer tables
   table_output <- shiny::reactive({
@@ -72,6 +70,7 @@ app_server <- function( input, output, session ) {
         dep.var.caption = opts_title_and_columns$caption(), ## MARCHE PAS
 
         ### Result options
+        covariate.labels = all_variables$variable_names,
         ci = opts_results$include_ci(),
         ci.level = opts_results$ci_level(),
         ci.separator = opts_results$ci_separator(),

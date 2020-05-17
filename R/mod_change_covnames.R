@@ -9,38 +9,71 @@
 #' @importFrom shiny NS tagList
 mod_change_covnames_ui <- function(id){
   ns <- NS(id)
-  tagList(
-    fluidRow(
-      shiny::column(
-        6,
-        shinyjs::disabled(
-          shiny::textInput(ns("test"), "Test", value = "truc")
-        )
-      ),
-      shiny::column(
-        6,
-        shiny::textInput(ns("test_2"), "Test", value = "blabla")
-      )
-    )
 
+  # We create vectors containing names of variables and ids to create two columns and then collect all input values with these ids
+  all_variables <- get_variables_names()
+  ids_ancient <- paste0("ancient", seq_len(length(all_variables)))
+  ids_new <- paste0("new", seq_len(length(all_variables)))
+
+  tagList(
+      modalDialog(
+        title = "Change covariates labels",
+        fluidRow(
+          shiny::column(
+            6,
+            strong("Current covariates labels"),
+            shinyjs::disabled(
+              purrr::map2(ids_ancient, all_variables, ~ textInput(
+                ns(.x), label = NULL, value = .y)
+              )
+            )
+          ),
+          shiny::column(
+            6,
+            strong("New covariates labels"),
+            purrr::map2(ids_new, all_variables, ~ textInput(
+              ns(.x), label = NULL, value = .y)
+            )
+          )
+        ),
+        footer = tagList(
+          modalButton("Dismiss"),
+          actionButton(ns("apply_covnames"),
+                       "Apply",
+                       style = "background-color: #286090;
+                                color: #fff;")
+        )
+    )
   )
 }
 
 #' change_covnames Server Function
 #'
-#' @noRd
+#' @return This returns three outputs:
+#' \itemize{
+#'   \item ancient - A vector containing all values in \code{textInput} in the column "current names".
+#'   \item new - A vector containing all values in \code{textInput} in the column "new names".
+#'   \item button - The value taken by the button "Apply". This is useful in \code{server} part to save the values stored in "new". Indeed, this is the only way to order the two buttons (the one to launch the modal and the one to apply the changes).
+#' }
 mod_change_covnames_server <- function(input, output, session){
   ns <- session$ns
 
-  observe({
-    updateTextInput(
-      session = session,
-      inputId = "test_2",
-      value = "machin"
-    )
+  all_variables <- get_variables_names()
+  ids_ancient <- paste0("ancient", seq_len(length(all_variables)))
+  ids_new <- paste0("new", seq_len(length(all_variables)))
+
+  observeEvent(input$apply_covnames, {
+    removeModal()
   })
 
-  print("this is a test")
+  return(
+    list(
+      ancient = reactive({ purrr::map_chr(ids_ancient, ~input[[.x]]) }),
+      new = reactive({ purrr::map_chr(ids_new, ~input[[.x]]) }),
+      button = reactive({ input$apply_covnames })
+    )
+  )
+
 
 }
 

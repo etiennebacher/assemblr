@@ -14,7 +14,8 @@ app_ui <- function(request) {
     golem_add_external_resources(),
     miniUI::gadgetTitleBar(
       "Build your {stargazer} tables interactively",
-      left = miniUI::miniTitleBarButton("regressions", "Regressions", primary = TRUE),
+      left = miniUI::miniTitleBarButton("regressions",
+                                        "Regressions", primary = TRUE),
       right = miniUI::miniTitleBarButton("cancel", "Cancel")
     ),
     shiny::br(),
@@ -23,10 +24,6 @@ app_ui <- function(request) {
         "Table Options",
         icon = shiny::icon("table"),
         miniUI::miniContentPanel(
-          # shiny::selectInput("choose_format",
-          #             "Choose the output format",
-          #             choices = c("HTML", "LaTeX"),
-          #             selected = "LaTeX"),
           shiny::fillRow(
             flex = c(0.5, 0.05, 0.5),
             shiny::fillCol(
@@ -41,7 +38,8 @@ app_ui <- function(request) {
               )
             ),
             shiny::fillCol(),
-            shiny::fillCol(shiny::uiOutput("stargazer"))
+            shiny::fillCol(
+              shiny::uiOutput("stargazer"))
           )
         )
       ),

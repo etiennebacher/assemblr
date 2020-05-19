@@ -3,15 +3,16 @@
 #' @description A shiny Module.
 #'
 #' @param id,input,output,session Internal parameters for {shiny}.
+#' @param all_variables Vector containing variables names, so that new names are in the left column when the modal is launched another time.
 #'
 #' @noRd
 #'
 #' @importFrom shiny NS tagList
-mod_change_covnames_ui <- function(id){
+mod_change_covnames_ui <- function(id, all_variables){
   ns <- NS(id)
 
   # We create vectors containing names of variables and ids to create two columns and then collect all input values with these ids
-  all_variables <- get_variables_names()
+  all_variables <- all_variables
   ids_ancient <- paste0("ancient", seq_len(length(all_variables)))
   ids_new <- paste0("new", seq_len(length(all_variables)))
 
@@ -49,16 +50,18 @@ mod_change_covnames_ui <- function(id){
 
 #' change_covnames Server Function
 #'
+#'#' @param all_variables Vector containing variables names, so that new names are in the left column when the left column is scraped.
+#'
 #' @return This returns three outputs:
 #' \itemize{
 #'   \item ancient - A vector containing all values in \code{textInput} in the column "current names".
 #'   \item new - A vector containing all values in \code{textInput} in the column "new names".
 #'   \item button - The value taken by the button "Apply". This is useful in \code{server} part to save the values stored in "new". Indeed, this is the only way to order the two buttons (the one to launch the modal and the one to apply the changes).
 #' }
-mod_change_covnames_server <- function(input, output, session){
+mod_change_covnames_server <- function(input, output, session, all_variables){
   ns <- session$ns
 
-  all_variables <- get_variables_names()
+  all_variables <- all_variables
   ids_ancient <- paste0("ancient", seq_len(length(all_variables)))
   ids_new <- paste0("new", seq_len(length(all_variables)))
 

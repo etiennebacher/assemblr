@@ -11,7 +11,7 @@ app_server <- function( input, output, session ) {
 
   # Get the regressions and the names of the variables
   list_regressions <- get_data()
-  all_variables <- reactiveValues ( variable_names = get_variables_names() )
+  all_variables <- reactiveValues(variable_names = get_variables_names())
 
   # Call all modules
   opts_general <- callModule(mod_general_server, "1")
@@ -25,7 +25,7 @@ app_server <- function( input, output, session ) {
   shiny::observeEvent(input$regressions, {
     shiny::showModal(shiny::modalDialog(
       title = "Choose the regressions in the table",
-      shiny::HTML(paste("If your environment does not contain object supported by {stargazer}, made-up regressions (", code("regression_1"), " and ", code("regression_2"), ") will be available for you to test this addin.", sep = "")),
+      shiny::HTML(paste("If your environment does not contain object supported by ", code("{stargazer}"), " made-up regressions (", code("regression_1"), " and ", code("regression_2"), ") will be available for you to test this addin.", sep = "")),
       shiny::selectInput(
         "choose_regressions",
         "",
@@ -41,9 +41,18 @@ app_server <- function( input, output, session ) {
   # Launch modal to change covariates labels
   shiny::observeEvent(opts_results$change_covariates_labels(), {
 
-    showModal(mod_change_covnames_ui("1"))
+    showModal(
+      mod_change_covnames_ui(
+        "1",
+        all_variables = all_variables$variable_names
+      )
+    )
 
-    change_covnames <- callModule(mod_change_covnames_server, "1")
+    change_covnames <- callModule(
+      mod_change_covnames_server,
+      "1",
+      all_variables = all_variables$variable_names
+    )
 
     # What is the interest of ancient names? They are stored in all_variables above (?)
     # all_variables$variable_names <- change_covnames$ancient()

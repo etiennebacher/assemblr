@@ -1,7 +1,6 @@
 #' Obtain variable names
 #'
 #' @return A vector containing the unique variables names in all regressions
-#' @export
 #'
 #' @examples NULL
 get_variables_names <- function(){

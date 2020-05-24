@@ -1,4 +1,4 @@
-hammer
+assemblr
 ================
 
-> The goal of {hammer} is to build {stargazer} tables more easily.
+> The goal of {assemblr} is to build {stargazer} tables more easily.

@@ -1,4 +1,4 @@
 Name: Build {stargazer} table
 Description: Build {stargazer} tables more easily
-Binding: hammer
+Binding: assemblr
 Interactive: true

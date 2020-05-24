@@ -96,7 +96,7 @@ golem_add_external_resources <- function(){
     favicon(),
     bundle_resources(
       path = app_sys('app/www'),
-      app_title = 'hammer'
+      app_title = 'assemblr'
     ),
     shinyjs::useShinyjs()
     # Add here other external resources

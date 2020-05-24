@@ -1,4 +1,4 @@
-j'ai remplacé run_app() par hammer() dans :
+j'ai remplacé run_app() par assemblr() dans :
 - test-golem-recommended.R
 - run_app.R
 - NAMESPACE

@@ -1,12 +1,12 @@
 # Building a Prod-Ready, Robust Shiny Application.
-# 
-# README: each step of the dev files is optional, and you don't have to 
-# fill every dev scripts before getting started. 
-# 01_start.R should be filled at start. 
+#
+# README: each step of the dev files is optional, and you don't have to
+# fill every dev scripts before getting started.
+# 01_start.R should be filled at start.
 # 02_dev.R should be used to keep track of your development during the project.
 # 03_deploy.R should be used once you need to deploy your app.
-# 
-# 
+#
+#
 ########################################
 #### CURRENT FILE: ON START SCRIPT #####
 ########################################
@@ -14,15 +14,15 @@
 ## Fill the DESCRIPTION ----
 ## Add meta data about your application
 golem::fill_desc(
-  pkg_name = "hammer", # The Name of the package containing the App 
-  pkg_title = "Build Stargazer Tables More Easily", # The Title of the package containing the App 
-  pkg_description = "{stargazer} has a lot of options to customize the output. 
-    This package provides a graphical interface to build {stargazer} tables more easily.", # The Description of the package containing the App 
+  pkg_name = "assemblr", # The Name of the package containing the App
+  pkg_title = "Build Stargazer Tables More Easily", # The Title of the package containing the App
+  pkg_description = "{stargazer} has a lot of options to customize the output.
+    This package provides a graphical interface to build {stargazer} tables more easily.", # The Description of the package containing the App
   author_first_name = "Etienne", # Your First Name
   author_last_name = "Bacher", # Your Last Name
   author_email = "etienne.bacher@orange.fr", # Your Email
-  repo_url = "https://github.com/etiennebacher/hammer" # The URL of the GitHub Repo (optional) 
-)     
+  repo_url = "https://github.com/etiennebacher/assemblr" # The URL of the GitHub Repo (optional)
+)
 
 ## Set {golem} options ----
 golem::set_golem_options()
@@ -48,7 +48,7 @@ golem::use_recommended_deps()
 ## Favicon ----
 # If you want to change the favicon (default is golem's one)
 golem::remove_favicon()
-golem::use_favicon() # path = "path/to/ico". Can be an online file. 
+golem::use_favicon() # path = "path/to/ico". Can be an online file.
 
 ## Add helper functions ----
 golem::use_utils_ui()

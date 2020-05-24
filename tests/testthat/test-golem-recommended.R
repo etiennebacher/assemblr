@@ -22,7 +22,7 @@ test_that(
       "R",
       c(
         "-e",
-        "pkgload::load_all(here::here());hammer()"
+        "pkgload::load_all(here::here());assemblr()"
       )
     )
     Sys.sleep(5)

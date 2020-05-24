@@ -1,4 +1,4 @@
 library(testthat)
-library(hammer)
+library(assemblr)
 
-test_check("hammer")
+test_check("assemblr")

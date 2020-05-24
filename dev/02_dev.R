@@ -62,7 +62,7 @@ usethis::use_test( "shiny_ui" )
 # Documentation
 
 ## Vignette ----
-usethis::use_vignette("hammer")
+usethis::use_vignette("assemblr")
 devtools::build_vignettes()
 
 ## Code coverage ----

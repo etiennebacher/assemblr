@@ -30,11 +30,11 @@ app_ui <- function(request) {
               style = "overflow-y:auto; max-height: 600px",
               shinyBS::bsCollapse(
                 id = "latex_options",
-                mod_general_ui("1"),
-                mod_title_and_columns_ui("1"),
-                mod_results_ui("1"),
-                mod_additional_info_ui("1"),
-                mod_footnote_ui("1")
+                mod_general_ui("mod_general_ui_1"),
+                mod_title_and_columns_ui("mod_title_and_columns_ui_1"),
+                mod_results_ui("mod_results_ui_1"),
+                mod_additional_info_ui("mod_additional_info_ui_1"),
+                mod_footnote_ui("mod_footnote_ui_1")
               )
             ),
             shiny::fillCol(),
@@ -49,7 +49,10 @@ app_ui <- function(request) {
         miniUI::miniContentPanel(
           shiny::fillRow(
             flex = c(1, 2, 1),
-            mod_reproduce_ui("1")
+            # mod_reproduce_ui("mod_reproduce_ui_1"),
+            shiny::actionButton("show_code", "Show code",
+                       style = "align: center;"),
+            shiny::verbatimTextOutput("reproducible_code")
           )
         )
       ),

@@ -17,7 +17,7 @@ mod_additional_info_ui <- function(id){
         ns("omit_stat"),
         "Omit summary statistics",
         choices = c(
-          "All statistics" = "all",
+          # "All statistics" = "all",
           "Adjusted R-Squared" = "adj.rsq",
           "Akaike Information Criterion" = "aic",
           "Bayesian Information Criterion" = "bic",

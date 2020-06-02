@@ -5,11 +5,12 @@
 #' @return A list containing the objects in Global Environment that {stargazer} can deal with.
 #' @importFrom stats lm
 #'
-#' @examples # make a random regression and create a random dataframe
-#' @examples regression <- lm(mpg ~ drat + hp + disp, data = datasets::mtcars)
-#' @examples test <- mtcars
-#' @examples # store only the objects whose class is "lm" in a list
-#' @examples get_data()
+#' @examples
+#' # make a random regression and create a random dataframe
+#' regression <- lm(mpg ~ drat + hp + disp, data = datasets::mtcars)
+#' test <- mtcars
+#' # store in a list only the objects whose class is supported by {stargazer}
+#' \dontrun{get_data()}
 get_data <- function(){
   get_ge <- base::ls(envir = base::globalenv())
   dd <- purrr::map(get_ge, base::get) # get object contents

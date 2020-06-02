@@ -17,11 +17,22 @@ mod_reproduce_ui <- function(id){
 #' reproduce Server Function
 #'
 #' @noRd
-mod_reproduce_server <- function(input, output, session){
+mod_reproduce_server <- function(input, output, session,
+                                 table_output){
   ns <- session$ns
 
+  code <- reactive({
+    shinymeta::expandChain(
+      quote({
+        library(stargazer)
+      }),
+      table_output$test_rep()
+    )
+  })
+
+
   output$reproducible_code <- renderText({
-    print("some text")
+    shinymeta::formatCode(code())
   })
 }
 

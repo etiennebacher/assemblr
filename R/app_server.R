@@ -14,16 +14,11 @@ app_server <- function( input, output, session ) {
   all_variables <- reactiveValues(variable_names = get_variables_names())
 
   # Call all modules
-  opts_general <- callModule(mod_general_server,
-                             "mod_general_ui_1")
-  opts_title_and_columns <- callModule(mod_title_and_columns_server,
-                                       "mod_title_and_columns_ui_1")
-  opts_results <- callModule(mod_results_server,
-                             "mod_results_ui_1")
-  opts_additional_info <- callModule(mod_additional_info_server,
-                                     "mod_additional_info_ui_1")
-  opts_footnote <- callModule(mod_footnote_server,
-                              "mod_footnote_ui_1")
+  opts_general <- mod_general_server("mod_general")
+  opts_title_and_columns <- mod_title_and_columns_server("mod_title_and_columns")
+  opts_results <- mod_results_server("mod_results")
+  opts_additional_info <- mod_additional_info_server("mod_additional_info")
+  opts_footnote <- mod_footnote_server("mod_footnote")
 
 
   # Launch modal to select regressions when button is clicked and at startup
@@ -53,14 +48,13 @@ app_server <- function( input, output, session ) {
 
     showModal(
       mod_change_covnames_ui(
-        "mod_change_covnames_ui_1",
+        "mod_change_covnames",
         all_variables = all_variables$variable_names
       )
     )
 
-    change_covnames <- callModule(
-      mod_change_covnames_server,
-      "mod_change_covnames_ui_1",
+    change_covnames <- mod_change_covnames_server(
+      "mod_change_covnames",
       all_variables = all_variables$variable_names
     )
 
@@ -76,9 +70,10 @@ app_server <- function( input, output, session ) {
   # Manipulations of the stargazer tables
   table_output <- shinymeta::metaReactive2({
     shiny::req(input$choose_regressions)
+    input$validate_options
 
+    isolate({
       shinymeta::metaExpr({
-        "# Replace 'html' by 'latex' to export this table in LaTeX."
         stargazer::stargazer(
           list_regressions[..(input$choose_regressions)],
 
@@ -113,6 +108,7 @@ app_server <- function( input, output, session ) {
           notes.label = ..(opts_footnote$notes_label())
         )
       })
+    })
   })
 
   ### Result
@@ -131,27 +127,27 @@ app_server <- function( input, output, session ) {
 
 
   ### Reproducibility of the code (much easier to do it here than in module)
-  code_pour_refaire <- reactive({
+  code_to_reproduce <- reactive({
     shinymeta::expandChain(
       quote({
-        library(stargazer)
+        base::library(stargazer)
       }),
       table_output()
     )
   })
 
-  shiny::observeEvent(input$show_code, {
-    shinymeta::displayCodeModal(
-      shinymeta::formatCode(
-        code_pour_refaire(),
-        width = 50L
-      ),
-      title = "Code to reproduce the table",
-      size = "l",
-      fontSize = 13,
-      height = "400px"
-    )
+  ### Copy the code
+  output$copy_code <- shiny::renderUI({
+    code_to_copy <- shinymeta::formatCode(
+      code_to_reproduce(),
+      width = 30L
+    ) %>%
+      stringr::str_replace("html", "latex") %>%
+      stringr::str_replace("base::", "")
+    code_to_copy_2 <- paste(code_to_copy, collapse = "\n")
+    rclipboard::rclipButton("clipbtn", "Copy the code", code_to_copy_2, icon("clipboard"))
   })
+
 
   ### Close app if cancel
   shiny::observeEvent(input$cancel, {

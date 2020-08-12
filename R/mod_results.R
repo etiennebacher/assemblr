@@ -18,6 +18,7 @@ mod_results_ui <- function(id){
                           "Change covariates labels"),
 
       shiny::br(),
+      shiny::br(),
 
       shiny::textInput(ns("report"), "Values to report") %>%
         shinyhelper::helper(type = "markdown",
@@ -114,7 +115,8 @@ mod_results_ui <- function(id){
 #' results Server Function
 #'
 #' @noRd
-mod_results_server <- function(input, output, session){
+mod_results_server <- function(id) {
+  moduleServer(id, function(input, output, session){
 
   return(
     list(
@@ -136,6 +138,7 @@ mod_results_server <- function(input, output, session){
     )
   )
 
+  })
 }
 
 ## To be copied in the UI

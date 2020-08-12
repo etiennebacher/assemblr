@@ -50,7 +50,8 @@ mod_change_covnames_ui <- function(id, all_variables){
 
 #' change_covnames Server Function
 #'
-#'#' @param all_variables Vector containing variables names, so that new names are in the left column when the left column is scraped.
+#' @param id Internal parameters for {shiny}.
+#' @param all_variables Vector containing variables names, so that new names are in the left column when the left column is scraped.
 #'
 #' @return This returns three outputs:
 #' \itemize{
@@ -58,7 +59,8 @@ mod_change_covnames_ui <- function(id, all_variables){
 #'   \item new - A vector containing all values in \code{textInput} in the column "new names".
 #'   \item button - The value taken by the button "Apply". This is useful in \code{server} part to save the values stored in "new". Indeed, this is the only way to order the two buttons (the one to launch the modal and the one to apply the changes).
 #' }
-mod_change_covnames_server <- function(input, output, session, all_variables){
+mod_change_covnames_server <- function(id, all_variables) {
+  moduleServer(id, function(input, output, session){
   ns <- session$ns
 
   all_variables <- all_variables
@@ -77,7 +79,7 @@ mod_change_covnames_server <- function(input, output, session, all_variables){
     )
   )
 
-
+  })
 }
 
 ## To be copied in the UI

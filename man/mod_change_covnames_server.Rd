@@ -4,7 +4,12 @@
 \alias{mod_change_covnames_server}
 \title{change_covnames Server Function}
 \usage{
-mod_change_covnames_server(input, output, session, all_variables)
+mod_change_covnames_server(id, all_variables)
+}
+\arguments{
+\item{id}{Internal parameters for {shiny}.}
+
+\item{all_variables}{Vector containing variables names, so that new names are in the left column when the left column is scraped.}
 }
 \value{
 This returns three outputs:
@@ -15,5 +20,5 @@ This returns three outputs:
 }
 }
 \description{
-#' @param all_variables Vector containing variables names, so that new names are in the left column when the left column is scraped.
+change_covnames Server Function
 }

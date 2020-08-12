@@ -37,14 +37,15 @@ mod_general_ui <- function(id){
 #' general Server Function
 #'
 #' @noRd
-mod_general_server <- function(input, output, session){
+mod_general_server <- function(id) {
+  moduleServer(id, function(input, output, session){
 
   return(
     list(
       style = reactive({ input$style })
     )
   )
-
+  })
 }
 
 ## To be copied in the UI

@@ -33,7 +33,8 @@ mod_title_and_columns_ui <- function(id){
 #' title_and_columns Server Function
 #'
 #' @noRd
-mod_title_and_columns_server <- function(input, output, session){
+mod_title_and_columns_server <- function(id) {
+  moduleServer(id, function(input, output, session){
 
   return(
     list(
@@ -44,6 +45,7 @@ mod_title_and_columns_server <- function(input, output, session){
     )
   )
 
+  })
 }
 
 ## To be copied in the UI

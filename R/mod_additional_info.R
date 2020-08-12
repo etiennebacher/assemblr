@@ -62,7 +62,8 @@ mod_additional_info_ui <- function(id){
 #' additional_info Server Function
 #'
 #' @noRd
-mod_additional_info_server <- function(input, output, session){
+mod_additional_info_server <- function(id) {
+  moduleServer(id, function(input, output, session){
 
   return(
     list(
@@ -72,7 +73,7 @@ mod_additional_info_server <- function(input, output, session){
       add_row_details = reactive({ input$add_row_details })
     )
   )
-
+  })
 }
 
 ## To be copied in the UI

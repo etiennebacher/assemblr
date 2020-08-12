@@ -24,6 +24,8 @@ usethis::use_package( "shinyhelper" )
 usethis::use_package( "purrr" )
 usethis::use_package( "base" )
 usethis::use_package( "shinymeta" )
+usethis::use_package( "rclipboard" )
+usethis::use_package( "stringr" )
 
 
 ## Add modules ----

@@ -43,7 +43,8 @@ mod_footnote_ui <- function(id){
 #' footnote Server Function
 #'
 #' @noRd
-mod_footnote_server <- function(input, output, session){
+mod_footnote_server <- function(id) {
+  moduleServer(id, function(input, output, session){
 
   return(
     list(
@@ -54,6 +55,7 @@ mod_footnote_server <- function(input, output, session){
     )
   )
 
+  })
 }
 
 ## To be copied in the UI

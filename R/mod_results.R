@@ -56,7 +56,7 @@ mod_results_ui <- function(id){
 
       shiny::textInput(
         ns("signif_symbol"),
-        "Statitiscal significance symbol",
+        "Statistical significance symbol",
         width = "75%",
         placeholder = 'Ex: "@", "@@", "@@@"'
       ),

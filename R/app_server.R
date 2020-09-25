@@ -90,6 +90,7 @@ app_server <- function( input, output, session ) {
           ci = ..(opts_results$include_ci()),
           ci.level = ..(opts_results$ci_level()),
           ci.separator = ..(opts_results$ci_separator()),
+          intercept.bottom = ..(opts_results$intercept_position()),
           single.row = ..(opts_results$single_row()),
           decimal.mark = ..(opts_results$decimal_mark()),
           digits = ..(opts_results$digits()),
@@ -142,8 +143,8 @@ app_server <- function( input, output, session ) {
       code_to_reproduce(),
       width = 30L
     ) %>%
-      stringr::str_replace("html", "latex") %>%
-      stringr::str_replace("base::", "")
+      gsub("html", "latex", .) %>%
+      gsub("base::", "", .)
     code_to_copy_2 <- paste(code_to_copy, collapse = "\n")
     rclipboard::rclipButton("clipbtn", "Copy the code", code_to_copy_2, icon("clipboard"))
   })

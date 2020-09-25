@@ -16,5 +16,12 @@ get_variables_names <- function(){
   all_variables <- unique(unlist(variables_regressions))
   # Rename "(Intercept)" as "Constant" since it is the name given by stargazer
   all_variables[all_variables == "(Intercept)"] <- "Constant"
+
+  # The default behavior of stargazer is to put "Constant" at the bottom. Therefore,
+  # it must be in last position in this vector of names.
+  num_variables <- length(all_variables)
+  all_variables <- all_variables[-1]
+  all_variables[num_variables] <- "Constant"
+
   return(all_variables)
 }

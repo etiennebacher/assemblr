@@ -59,7 +59,9 @@ mod_results_ui <- function(id){
         "Statistical significance symbol",
         width = "75%",
         placeholder = 'Ex: "@", "@@", "@@@"'
-      ),
+      ) %>%
+        shinyhelper::helper(type = "markdown",
+                            content = "signif_symbols"),
 
       shiny::textInput(
         ns("star_cutoffs"),
@@ -125,7 +127,10 @@ mod_results_server <- function(id) {
       include_ci = reactive({ input$include_ci }),
       ci_level = reactive({ input$ci_level }),
       ci_separator = reactive({ input$ci_separator }),
-      intercept_position = reactive({ input$intercept_position }),
+      intercept_position = reactive({
+        if (input$intercept_position == "bottom") TRUE
+        else FALSE
+      }),
       single_row = reactive({ input$single_row }),
       signif_symbol = reactive({ input$signif_symbol }),
       star_cutoffs = reactive({ input$star_cutoffs }),
